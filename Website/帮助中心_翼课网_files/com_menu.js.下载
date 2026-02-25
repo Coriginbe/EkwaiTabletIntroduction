@@ -1,0 +1,26 @@
+$(window).ready(function(){
+    $(".com_menu>ul>li").each(function(){
+        if($(this).find("ol").length>0){
+            $(this).find("ol").siblings("a").attr("href", "javascript:void(0);");
+        }
+    });
+    $(".com_menu > ul > li > a").click(function(){
+        if($(this).siblings("ol").length==0){
+            return;
+        }
+        if($(this).siblings("ol:visible").length>0){
+            $(this).parent().removeClass("active").find("ol").slideUp('fast');
+        }else{
+            $(this).parent().siblings().removeClass("active");
+            $(this).parent().addClass("active").find("ol").slideDown('fast');
+            $(this).parent().siblings().find("ol").slideUp('fast');
+        }
+    });
+
+    $(".com_menu ol li").mouseover(function(){
+        $(this).addClass("cur");
+        $(this).siblings().removeClass("cur");
+    }).mouseout(function(){
+            $(this).removeClass("cur");
+        });
+});
